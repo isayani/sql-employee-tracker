@@ -28,7 +28,6 @@ CREATE TABLE employee (
     REFERENCES role(id), 
     FOREIGN KEY (manager_id)
     REFERENCES employee(id) WHERE role.title LIKE '%Manager%'
-    manager_id INT NOT NULL
     ON DELETE SET NULL
 );
 
