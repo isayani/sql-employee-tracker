@@ -12,7 +12,7 @@ const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME;
 
 // Connect to staff db
-async function dbConnection() {
+async function dbConnection(select) {
     try {
         const db = await mysql.createConnection (
             {
@@ -29,13 +29,13 @@ async function dbConnection() {
 
         // switch for all user input cases
         switch (select) {
-            case 'View All Departments':
+            case 'View All Departments': // id, name
                 returnedRowsFromDb = await db.query('SELECT * FROM department');
                 console.table(returnedRowsFromDb); // needs to be part of array?
                 break;
 
 
-            case 'View All Roles':
+            case 'View All Roles': // role id, job title, department value, salary value
                 returnedRowsFromDb = await db.query(`
                 SELECT
                     role.id,
@@ -48,7 +48,7 @@ async function dbConnection() {
                 console.table(returnedRowsFromDb); // needs to be part of array?
                 break;
 
-            case 'View All Employees':
+            case 'View All Employees': // employee id, first name, last name, job title, department, salary and manager
                 returnedRowsFromDb = await db.query(`
                 SELECT
                     employee.id,
@@ -62,8 +62,61 @@ async function dbConnection() {
                 JOIN role ON employee.role_id = role.id
                 JOIN department ON role.department_id = department.id
                 JOIN employee manager_table ON employee.manager_id = manager_table.id
-                `
-                );
+                `);
+                console.table(returnedRowsFromDb); // needs to be part of array?
+                break;
+
+            case 'Add a Department': // enter name; department added to db
+                returnedOutputFromInq = await inquirer.prompt([
+                    {
+                        name: 'department',
+                        message: 'Enter New Department Name:',
+                        
+                    }
+                ]);
+            case 'Add a Role': // enter name, salary, department; role added to db
+                returnedOutputFromInq = await inquirer.prompt([
+                    {
+                        name: 'roleName',
+                        message: 'Enter New Role Name:',
+                        
+                    },
+                    {
+                        name: 'roleSalary',
+                        message: 'Enter New Role Salary:',
+                        
+                    },
+                    {
+                        name: 'roleDpt',
+                        message: 'Enter New Role Department:',
+                        
+                    },
+                ]);
+            case 'Add an Employee': // enter employee fname, lname, role, manager; employee added to db
+                returnedOutputFromInq = await inquirer.prompt([
+                    {
+                        name: 'empFname',
+                        message: "Enter New Employee's First Name:",
+                        
+                    },
+                    {
+                        name: 'empLname',
+                        message: "Enter New Employee's Last Name:",
+                        
+                    },
+                    {
+                        name: 'empRole',
+                        message: "Enter New Employee's Role:",
+                        
+                    },
+                    {
+                        name: 'empMgr',
+                        message: "Enter New Employee's Manager:",
+                        
+                    },
+                ]);
+
+            case 'Update an Employee Role': // select employee, update role; updated in db
                     
 
         }
@@ -72,4 +125,42 @@ async function dbConnection() {
     }
 
 };
+
+function userPrompt(){
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'select',
+                message: 'What would you like to do?',
+                choices: [
+                    'View All Departments',
+                    'View All Roles',
+                    'View All Employees',
+                    'Add a Department',
+                    'Add a Role',
+                    'Add an Employee',
+                    'Update an Employee',
+                    new inquirer.Separator(),
+                    'Quit',
+                
+                ]
+            }
+        ])
+        .then(async(res) => {
+            await dbConnection(res.select);
+            res.select === 'Quit' 
+            ? process.exit 
+            : userPrompt()
+        })
+        .catch((err) => {
+            if (error.isTtyError) {
+                
+            } else {
+                err; // may have to add display
+            }
+        });
+}
+
+userPrompt();
 
