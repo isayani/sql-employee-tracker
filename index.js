@@ -1,12 +1,11 @@
-// importing package files
+// importing package files (console.table no longer required)
 const inquirer = require("inquirer");
-const mysql = require("mysql2/promise"); // added promise, wouldn't run without
-const cTable = require("console.table");
+const mysql = require("mysql2/promise");
 
 // Encryption for env file
 require("dotenv").config();
 
-// dotenv variables
+// Dotenv variables
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME;
@@ -27,12 +26,14 @@ async function dbConnection(select) {
 
     // switch for all user input cases
     switch (select) {
-      case "View All Departments": // id, name
+      // id, name
+      case "View All Departments":
         returnedRowsFromDb = await db.query("SELECT * FROM department");
         console.table(returnedRowsFromDb[0]); // needs to be part of array?
         break;
 
-      case "View All Roles": // role id, job title, department value, salary value
+      // role id, job title, department value, salary value
+      case "View All Roles":
         returnedRowsFromDb = await db.query(`
                 SELECT
                     role.id,
@@ -45,7 +46,8 @@ async function dbConnection(select) {
         console.table(returnedRowsFromDb[0]); // needs to be part of array?
         break;
 
-      case "View All Employees": // employee id, first name, last name, job title, department, salary and manager
+      // employee id, first name, last name, job title, department, salary and manager
+      case "View All Employees":
         returnedRowsFromDb = await db.query(`
                 SELECT
                     employee.id,
@@ -63,7 +65,8 @@ async function dbConnection(select) {
         console.table(returnedRowsFromDb[0]); // needs to be part of array?
         break;
 
-      case "Add a Department": // enter name; department added to db
+      // enter name; department added to db
+      case "Add a Department":
         returnedOutputFromInq = await inquirer.prompt([
           {
             name: "department",
@@ -82,7 +85,8 @@ async function dbConnection(select) {
 
         break;
 
-      case "Add a Role": // enter name, salary, department; role added to db
+      // enter name, salary, department; role added to db
+      case "Add a Role":
         // Prompt user for values needed for new Role
         returnedOutputFromInq = await inquirer.prompt([
           {
@@ -124,7 +128,8 @@ async function dbConnection(select) {
 
         break;
 
-      case "Add an Employee": // enter employee fname, lname, role, manager; employee added to db
+      // enter employee fname, lname, role, manager; employee added to db
+      case "Add an Employee":
         returnedOutputFromInq = await inquirer.prompt([
           {
             name: "first_name",
@@ -166,7 +171,8 @@ async function dbConnection(select) {
 
         break;
 
-      case "Update an Employee Role": // select employee, update role; updated in db
+      // select employee, update role; updated in db
+      case "Update an Employee Role":
         currentEmployees = await db.query(`
                 SELECT id, first_name, last_name FROM employee;`);
 
