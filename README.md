@@ -55,7 +55,7 @@ To run Your EmployeeDB 👩🏽‍💼👩🏽‍💻 locally:
 2. Run ```npm i``` to install all dependencies
 3. Invoke app with ```node index.js``` </br> or ```nodemon index.js``` for nodemon
 </br>
-This is a command line application and has not been deployed. The following animations show it being used as directed:
+This is a command line application and has not been deployed. The following animation shows its use as directed:
 
 
 
@@ -70,12 +70,12 @@ This project is licensed under the MIT license.
 A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.<p/>For more information visit [MIT Licensing](https://choosealicense.com/licenses/mit/).
 
 ## Technologies Employed
+* SQL
+* Node
+* Dotenv
+* Inquirer
 * JavaScript
 * MySQL Server
-* Node.js
-* Inquirer.js
-* Dotenv
-* MySQL2
 
 ## Future Development
 We would like to continue to add the following functionality to our application:
