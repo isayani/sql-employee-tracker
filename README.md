@@ -79,9 +79,12 @@ A short and simple permissive license with conditions only requiring preservatio
 
 ## Future Development
 We would like to continue to add the following functionality to our application:
-- Update an Employee &check;
-- Manager Updates
+- Update Employee Managers
+- View Employees by Manager
 - Inquirer "Back" Interaction
+- View Employees by Department
+- Delete Department, Role and Employee
+- View Total Utilized Budget of Department
 
 ## Contributing
 We'd love for you to contribute! In order to do so, fork this repository. Your pull request will need approval in order to merge to ```main```. <br/><br/> Take a look at our [Future Development](#future-development) section to see what we are looking to expand on (implemented features are denoted with a &check;). Feel free to implement your own ideas and merge request!
