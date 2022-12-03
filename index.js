@@ -43,7 +43,7 @@ async function dbConnection(select) {
                 FROM role
                 JOIN department ON role.department_id = department.id
                 `);
-        console.table(returnedRowsFromDb[0]); // needs to be part of array?
+        console.table(returnedRowsFromDb[0]); 
         break;
 
       // employee id, first name, last name, job title, department, salary and manager
@@ -62,7 +62,7 @@ async function dbConnection(select) {
                 JOIN department ON role.department_id = department.id
                 JOIN employee manager_table ON employee.manager_id = manager_table.id
                 `);
-        console.table(returnedRowsFromDb[0]); // needs to be part of array?
+        console.table(returnedRowsFromDb[0]); 
         break;
 
       // enter name; department added to db
@@ -103,7 +103,7 @@ async function dbConnection(select) {
           },
         ]);
 
-        //Destructure returnedOutputFromInq
+        // Destructure returnedOutputFromInq
         const { roleName, roleSalary, roleDpt } = returnedOutputFromInq;
 
         // Make a variable to store value from the DB call to get department id
