@@ -79,9 +79,9 @@ A short and simple permissive license with conditions only requiring preservatio
 
 ## Future Development
 We would like to continue to add the following functionality to our application:
+- Inquirer "Back" Interaction
 - Update Employee Managers
 - View Employees by Manager
-- Inquirer "Back" Interaction
 - View Employees by Department
 - Delete Department, Role and Employee
 - View Total Utilized Budget of Department
